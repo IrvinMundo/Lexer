@@ -25,15 +25,17 @@
 #define FOR 21
 #define RETURN 22
 #define AND 23
+#define ALERTA 24
+#define BACKSPACE 25
+#define SALTOPAG 26
+#define RETURN
+#define TAB
+#define VERTAB
+#define INTERROG
+#define NUEVALINEA
 #define 
-#define 
-#define 
-#define 
-#define 
-#define 
-#define 
-#define 
-#define 
+
+
 int yylval;
 int installID();
 int installNum();
