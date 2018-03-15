@@ -72,13 +72,13 @@ else {return(ELSE);}
 "\"" {yylval = TEXTO; return(RELOP);}
 ":-" {yylval = OTRO; return(RELOP);}
 "\%.*" {yylval = OTRO; return(RELOP);}
-"\a" {yylval = OTRO; return(RELOP);}
-"\b" {yylval = NUEVALINEA; return(RELOP);}
-"\f" {yylval = NUEVALINEA; return(RELOP);}
-"\r" {yylval = NUEVALINEA; return(RELOP);}
-"\t" {yylval = NUEVALINEA; return(RELOP);}
-"\v" {yylval = NUEVALINEA; return(RELOP);}
-"\?" {yylval = NUEVALINEA; return(RELOP);}
+"\a" {yylval = ALERTA; return(RELOP);}
+"\b" {yylval = BACKSPACE; return(RELOP);}
+"\f" {yylval = SALTOPAG; return(RELOP);}
+"\r" {yylval = RETURN; return(RELOP);}
+"\t" {yylval = TAB; return(RELOP);}
+"\v" {yylval = VERTAB; return(RELOP);}
+"\?" {yylval = INTERROG; return(RELOP);}
 "\n" {yylval = NUEVALINEA; return(RELOP);}
 
 [A-Za-z_][A-Za-z0-9_]* { yylval.id = yytext; return T_IDENTIFIER; }
