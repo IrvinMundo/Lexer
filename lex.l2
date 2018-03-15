@@ -20,6 +20,11 @@
 #define NUMBER 16
 #define RELOP 17
 #define WHILE 18
+#define PRINT 19
+#define PRINTF 20
+#define FOR 21
+#define RETURN 22
+#define AND 23
 int yylval;
 int installID();
 int installNum();
@@ -38,6 +43,10 @@ number {digit}+(\.{digit}+)?(E[+-]?{digit}+)?
 
 {ws} {/* no action and no return */}
 while {return(WHILE);}
+print {return(PRINT);}
+printf {return(PRINTF);}
+for{return(FOR);}
+and{return(AND);}
 if {return(IF);}
 then {return(THEN);}
 else {return(ELSE);}
