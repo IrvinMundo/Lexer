@@ -25,6 +25,15 @@
 #define FOR 21
 #define RETURN 22
 #define AND 23
+#define 
+#define 
+#define 
+#define 
+#define 
+#define 
+#define 
+#define 
+#define 
 int yylval;
 int installID();
 int installNum();
@@ -62,7 +71,17 @@ else {return(ELSE);}
 "~" {yylval = GUION; return(RELOP);}
 "\"" {yylval = TEXTO; return(RELOP);}
 ":-" {yylval = OTRO; return(RELOP);}
+"\%.*" {yylval = OTRO; return(RELOP);}
+"\a" {yylval = OTRO; return(RELOP);}
+"\b" {yylval = NUEVALINEA; return(RELOP);}
+"\f" {yylval = NUEVALINEA; return(RELOP);}
+"\r" {yylval = NUEVALINEA; return(RELOP);}
+"\t" {yylval = NUEVALINEA; return(RELOP);}
+"\v" {yylval = NUEVALINEA; return(RELOP);}
+"\?" {yylval = NUEVALINEA; return(RELOP);}
+"\n" {yylval = NUEVALINEA; return(RELOP);}
 
+[A-Za-z_][A-Za-z0-9_]* { yylval.id = yytext; return T_IDENTIFIER; }
 
 %%
 
