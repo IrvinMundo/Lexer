@@ -43,15 +43,15 @@ then {return(THEN);}
 else {return(ELSE);}
 {id} {yylval = (int) installID(); return(ID);}
 {number} {yylval = (int) installNum(); return(NUMBER);}
-"#\=" {yylval = IGUAL; return(RELOP);}
+"=" {yylval = IGUAL; return(RELOP);}
 "!=" {yylval = DIFER; return(RELOP);}
-"#\?" {yylval = QMARK; return(RELOP);}
-"#\." {yylval = PUNTO; return(RELOP);}
-"#\," {yylval = COMA; return(RELOP);}
-"#\(" {yylval = PARIZ; return(RELOP);}
-"#\)" {yylval = PARDE; return(RELOP);}
-"#\~" {yylval = GUION; return(RELOP);}
-"#\"" {yylval = TEXTO; return(RELOP);}
+"?" {yylval = QMARK; return(RELOP);}
+"." {yylval = PUNTO; return(RELOP);}
+"," {yylval = COMA; return(RELOP);}
+"(" {yylval = PARIZ; return(RELOP);}
+")" {yylval = PARDE; return(RELOP);}
+"~" {yylval = GUION; return(RELOP);}
+"\"" {yylval = TEXTO; return(RELOP);}
 ":-" {yylval = OTRO; return(RELOP);}
 
 
