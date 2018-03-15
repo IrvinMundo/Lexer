@@ -28,12 +28,12 @@
 #define ALERTA 24
 #define BACKSPACE 25
 #define SALTOPAG 26
-#define RETURN
-#define TAB
-#define VERTAB
-#define INTERROG
-#define NUEVALINEA
-#define 
+#define RETURN 27
+#define TAB 28
+#define VERTAB 29
+#define INTERROG 30
+#define NUEVALINEA 31
+#define COMMENT 32
 
 
 int yylval;
@@ -73,7 +73,7 @@ else {return(ELSE);}
 "~" {yylval = GUION; return(RELOP);}
 "\"" {yylval = TEXTO; return(RELOP);}
 ":-" {yylval = OTRO; return(RELOP);}
-"\%.*" {yylval = OTRO; return(RELOP);}
+"\%.*" {yylval = COMMENT; return(RELOP);}
 "\a" {yylval = ALERTA; return(RELOP);}
 "\b" {yylval = BACKSPACE; return(RELOP);}
 "\f" {yylval = SALTOPAG; return(RELOP);}
