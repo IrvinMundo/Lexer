@@ -1,0 +1,78 @@
+%option noyywrap
+%{
+#include <stdio.h>
+
+#define IGUAL 1
+#define DIFER 2
+#define QMARK 3
+#define PUNTO 4
+#define COMA  5
+#define PARIZ 6
+#define PARDE 7
+#define GUION 8
+#define TEXTO 9
+#define OTRO  10
+#define EOF   11
+#define IF 12
+#define THEN 13
+#define ELSE 14
+#define ID 15
+#define NUMBER 16
+#define RELOP 17
+#define WHILE 18
+int yylval;
+int installID();
+int installNum();
+%}
+
+/* regular definitions */
+delim [ \t\n]
+ws {delim}+
+letter [_A-Za-z]
+digit [0-9]
+id {letter}({letter}|{digit})*
+number {digit}+(\.{digit}+)?(E[+-]?{digit}+)?
+
+
+%%
+
+{ws} {/* no action and no return */}
+while {return(WHILE);}
+if {return(IF);}
+then {return(THEN);}
+else {return(ELSE);}
+{id} {yylval = (int) installID(); return(ID);}
+{number} {yylval = (int) installNum(); return(NUMBER);}
+"#\=" {yylval = IGUAL; return(RELOP);}
+"!=" {yylval = DIFER; return(RELOP);}
+"#\?" {yylval = QMARK; return(RELOP);}
+"#\." {yylval = PUNTO; return(RELOP);}
+"#\," {yylval = COMA; return(RELOP);}
+"#\(" {yylval = PARIZ; return(RELOP);}
+"#\)" {yylval = PARDE; return(RELOP);}
+"#\~" {yylval = GUION; return(RELOP);}
+"#\"" {yylval = TEXTO; return(RELOP);}
+":-" {yylval = OTRO; return(RELOP);}
+
+
+%%
+
+int installID() {/* function to install the lexeme, whose
+                    first character is pointed to by yytext,
+                    and whose length is yyleng, into the
+                    symbol table and return a pointer
+                    thereto */
+   return 1;
+}
+
+int installNum() {/* similar to installID, but puts numerical
+                     constants into a separate table */
+   return 1;
+}
+int main() {
+    int r;
+    while ((r = yylex())) {
+       printf("%d, %d\n", r, yylval);
+       printf("yytext = %s\n", yytext);
+    }
+}
