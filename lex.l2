@@ -36,6 +36,7 @@
 #define COMMENT 32
 
 #define IDENTIFIER 33
+#define VARIABLE 34
 
 int yylval;
 int installID();
@@ -85,6 +86,7 @@ else {return(ELSE);}
 "\n" {yylval = NUEVALINEA; return(RELOP);}
 
 "[_a-z_][_A-Za-z0-9_]*" { yylval.id = yytext; return IDENTIFIER; }
+"[_A-Z_][_A-Za-z0-9_]*" { yylval.id = yytext; return VARIABLE; }
 
 %%
 
