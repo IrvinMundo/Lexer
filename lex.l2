@@ -84,7 +84,7 @@ else {return(ELSE);}
 "\?" {yylval = INTERROG; return(RELOP);}
 "\n" {yylval = NUEVALINEA; return(RELOP);}
 
-"[A-Za-z_][A-Za-z0-9_]*" { yylval.id = yytext; return IDENTIFIER; }
+"[_a-z_][_A-Za-z0-9_]*" { yylval.id = yytext; return IDENTIFIER; }
 
 %%
 
