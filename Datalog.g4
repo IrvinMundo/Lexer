@@ -1,0 +1,46 @@
+grammar Datalog;
+prog:	(expr NEWLINE)* ;
+
+expr:	ESQUEMAS DOSPUNTOS esquema listaesquemas   HECHOS DOSPUNTOS listahechos   REGLAS DOSPUNTOS listareglas   CONSULTAS DOSPUNTOS consulta listaconsultas;
+esquema: ID PARENTESISI ID listaid PARENTESISD;
+listaesquemas:	esquema listaesquemas | NEWLINE;
+listaid:	COMA ID listaid | NEWLINE;
+hecho:	ID PARENTESISI TEXTO listastrings PARENTESISD PUNTO;
+listahechos: hecho listahechos | NEWLINE;
+regla: cabezapredicado DOSPUNTOSGUION predicado listapredicados PUNTO;
+listareglas: regla listareglas | NEWLINE;
+cabezapredicado: ID PARENTESISI ID listaid PARENTESISD;
+predicado: ID PARENTESISI parametro listaparametros PARENTESISD;
+listapredicados: COMA predicado listapredicados | NEWLINE;
+parametro: TEXTO | ID | expresion;
+listaparametros:	COMA parametro listaparametros | NEWLINE;
+expresion: PARENTESISI parametro operador parametro PARENTESISD;
+operador: SUMA | MULT;
+consulta: predicado INTERROGA;
+listaconsultas: consulta listaconsultas | NEWLINE;
+listastrings: COMA TEXTO listastrings | NEWLINE;
+
+
+PUNTO:'.';
+COMA:',';
+INTERROGA:'?';
+PARENTESISI:'(';
+PARENTESISD:')';
+DOSPUNTOS:':';
+DOSPUNTOSGUION:':-';
+ESQUEMAS: 'Schemes';
+HECHOS: 'Facts';
+REGLAS: 'Rules';
+CONSULTAS: 'Queries';
+MULT:'*';
+SUMA:'+';
+NEWLINE : [\r\n]+ ;
+INT: [0-9]+ ;
+ID:('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'| INT )*;
+TEXTO :  '\'' ( ESC_SEQ | ~('\\'|'\'') )* '\'';
+COMENTARIO: '#' ~('\n'|'\r')* '\r'? '\n';
+WS  :   ( ' ' | '\t' | '\r' | '\n') ;
+HEX_DIGIT : ('0'..'9'|'a'..'f'|'A'..'F') ;
+ESC_SEQ :   '\\' ('b'|'t'|'n'|'f'|'r'|'\''|'\\') | UNICODE_ESC | OCTAL_ESC;
+OCTAL_ESC : '\\' ('0'..'3') ('0'..'7') ('0'..'7') | '\\' ('0'..'7') ('0'..'7') | '\\' ('0'..'7');
+UNICODE_ESC : '\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT;
