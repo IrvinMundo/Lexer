@@ -1,7 +1,7 @@
 /**
  * Define a grammar called Hello
  */
-grammar Hello;
+grammar Datalog;
 r  : 'hello' ID ;         // match keyword hello followed by an identifier
 
 ID : [a-zA-Z][a-zA-Z0-9]* ;             // match lower-case identifiers
