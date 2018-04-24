@@ -48,6 +48,12 @@ listaconsultas: consulta listaconsultas | NEWLINE;
 listastrings: COMA TEXTO listastrings | NEWLINE;
 
 
+IGUAL: '=' ;
+
+DIFER: '!=' ;
+
+GUION: '~' ;
+
 PUNTO:'.';
 
 COMA:',';
