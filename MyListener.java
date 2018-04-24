@@ -3,24 +3,24 @@ import java.util.*;
 
 public class MyListener extends DatalogBaseListener {
   @Override public void exitEsquema(DatalogParser.EsquemaContext ctx) {
-    System.out.print("{Esquema => " + ctx.getText() + "}");
+    System.out.println("{Esquema => " + ctx.getText() + "}");
   }
   @Override public void exitHecho(DatalogParser.HechoContext ctx) {
-    System.out.print("{Hecho => " + ctx.getText() + "}");
+    System.out.println("{Hecho => " + ctx.getText() + "}");
   }
   @Override public void exitRegla(DatalogParser.ReglaContext ctx) {
-    System.out.print("{Regla => " + ctx.getText() + "}");
+    System.out.println("{Regla => " + ctx.getText() + "}");
   }
   @Override public void exitPredicado(DatalogParser.PredicadoContext ctx) {
-    System.out.print("{Pedicado => " + ctx.getText() + "}");
+    System.out.println("{Pedicado => " + ctx.getText() + "}");
   }
   @Override public void exitParametro(DatalogParser.ParametroContext ctx) {
-    System.out.print("{Parámetro => " + ctx.getText() + "}");
+    System.out.println("{Parámetro => " + ctx.getText() + "}");
   }
   @Override public void exitConsulta(DatalogParser.ConsultaContext ctx) {
-    System.out.print("{Consulta => " + ctx.getText() + "}");
+    System.out.println("{Consulta => " + ctx.getText() + "}");
   }
   @Override	public void exitProg(DatalogParser.ProgContext ctx) {
-		System.out.println (ctx.getText());
+		//System.out.println(ctx.getText());
 	}
 }

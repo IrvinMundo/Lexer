@@ -4,14 +4,8 @@
 grammar Datalog;
 prog:	(expr NEWLINE)* ;
 
-ID : [a-zA-Z][a-zA-Z0-9]* ;             // match lower-case identifiers
-//ID:('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'| INT )*;
 
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
-
-
-
-expr:	ESQUEMAS DOSPUNTOS esquema listaesquemas   HECHOS DOSPUNTOS listahechos   REGLAS DOSPUNTOS listareglas   CONSULTAS DOSPUNTOS consulta listaconsultas;
+expr:	ESQUEMAS DOSPUNTOS esquema listaesquemas |  HECHOS DOSPUNTOS listahechos |  REGLAS DOSPUNTOS listareglas |  CONSULTAS DOSPUNTOS consulta listaconsultas;
 
 esquema: ID PARENTESISI ID listaid PARENTESISD;
 
@@ -89,3 +83,8 @@ TEXTO :  '\'' ( ESC_TIPO_C | ~('\\'|'\'') )* '\'';
 COMENTARIO: '#' ~('\n'|'\r')* '\r'? '\n';
 
 ESC_TIPO_C :   '\\' ('b'|'t'|'n'|'f'|'r'|'\''|'\\') ;
+
+ID : [a-zA-Z][a-zA-Z0-9]* ;             // match lower-case identifiers
+//ID:('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'| INT )*;
+
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines

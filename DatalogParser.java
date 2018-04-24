@@ -16,10 +16,10 @@ public class DatalogParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		ID=1, WS=2, IGUAL=3, DIFER=4, GUION=5, PUNTO=6, COMA=7, INTERROGA=8, PARENTESISI=9, 
-		PARENTESISD=10, DOSPUNTOS=11, DOSPUNTOSGUION=12, ESQUEMAS=13, HECHOS=14, 
-		REGLAS=15, CONSULTAS=16, MULT=17, SUMA=18, NEWLINE=19, INT=20, TEXTO=21, 
-		COMENTARIO=22, ESC_TIPO_C=23;
+		IGUAL=1, DIFER=2, GUION=3, PUNTO=4, COMA=5, INTERROGA=6, PARENTESISI=7, 
+		PARENTESISD=8, DOSPUNTOS=9, DOSPUNTOSGUION=10, ESQUEMAS=11, HECHOS=12, 
+		REGLAS=13, CONSULTAS=14, MULT=15, SUMA=16, NEWLINE=17, INT=18, TEXTO=19, 
+		COMENTARIO=20, ESC_TIPO_C=21, ID=22, WS=23;
 	public static final int
 		RULE_prog = 0, RULE_expr = 1, RULE_esquema = 2, RULE_listaesquemas = 3, 
 		RULE_listaid = 4, RULE_hecho = 5, RULE_listahechos = 6, RULE_regla = 7, 
@@ -34,15 +34,14 @@ public class DatalogParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, null, null, "'='", "'!='", "'~'", "'.'", "','", "'?'", "'('", "')'", 
-		"':'", "':-'", "'Schemes'", "'Facts'", "'Rules'", "'Queries'", "'*'", 
-		"'+'"
+		null, "'='", "'!='", "'~'", "'.'", "','", "'?'", "'('", "')'", "':'", 
+		"':-'", "'Schemes'", "'Facts'", "'Rules'", "'Queries'", "'*'", "'+'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "ID", "WS", "IGUAL", "DIFER", "GUION", "PUNTO", "COMA", "INTERROGA", 
-		"PARENTESISI", "PARENTESISD", "DOSPUNTOS", "DOSPUNTOSGUION", "ESQUEMAS", 
-		"HECHOS", "REGLAS", "CONSULTAS", "MULT", "SUMA", "NEWLINE", "INT", "TEXTO", 
-		"COMENTARIO", "ESC_TIPO_C"
+		null, "IGUAL", "DIFER", "GUION", "PUNTO", "COMA", "INTERROGA", "PARENTESISI", 
+		"PARENTESISD", "DOSPUNTOS", "DOSPUNTOSGUION", "ESQUEMAS", "HECHOS", "REGLAS", 
+		"CONSULTAS", "MULT", "SUMA", "NEWLINE", "INT", "TEXTO", "COMENTARIO", 
+		"ESC_TIPO_C", "ID", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -128,7 +127,7 @@ public class DatalogParser extends Parser {
 			setState(43);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==ESQUEMAS) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ESQUEMAS) | (1L << HECHOS) | (1L << REGLAS) | (1L << CONSULTAS))) != 0)) {
 				{
 				{
 				setState(38);
@@ -156,10 +155,7 @@ public class DatalogParser extends Parser {
 
 	public static class ExprContext extends ParserRuleContext {
 		public TerminalNode ESQUEMAS() { return getToken(DatalogParser.ESQUEMAS, 0); }
-		public List<TerminalNode> DOSPUNTOS() { return getTokens(DatalogParser.DOSPUNTOS); }
-		public TerminalNode DOSPUNTOS(int i) {
-			return getToken(DatalogParser.DOSPUNTOS, i);
-		}
+		public TerminalNode DOSPUNTOS() { return getToken(DatalogParser.DOSPUNTOS, 0); }
 		public EsquemaContext esquema() {
 			return getRuleContext(EsquemaContext.class,0);
 		}
@@ -199,36 +195,59 @@ public class DatalogParser extends Parser {
 		ExprContext _localctx = new ExprContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_expr);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(46);
-			match(ESQUEMAS);
-			setState(47);
-			match(DOSPUNTOS);
-			setState(48);
-			esquema();
-			setState(49);
-			listaesquemas();
-			setState(50);
-			match(HECHOS);
-			setState(51);
-			match(DOSPUNTOS);
-			setState(52);
-			listahechos();
-			setState(53);
-			match(REGLAS);
-			setState(54);
-			match(DOSPUNTOS);
-			setState(55);
-			listareglas();
-			setState(56);
-			match(CONSULTAS);
-			setState(57);
-			match(DOSPUNTOS);
-			setState(58);
-			consulta();
-			setState(59);
-			listaconsultas();
+			setState(62);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case ESQUEMAS:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(46);
+				match(ESQUEMAS);
+				setState(47);
+				match(DOSPUNTOS);
+				setState(48);
+				esquema();
+				setState(49);
+				listaesquemas();
+				}
+				break;
+			case HECHOS:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(51);
+				match(HECHOS);
+				setState(52);
+				match(DOSPUNTOS);
+				setState(53);
+				listahechos();
+				}
+				break;
+			case REGLAS:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(54);
+				match(REGLAS);
+				setState(55);
+				match(DOSPUNTOS);
+				setState(56);
+				listareglas();
+				}
+				break;
+			case CONSULTAS:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(57);
+				match(CONSULTAS);
+				setState(58);
+				match(DOSPUNTOS);
+				setState(59);
+				consulta();
+				setState(60);
+				listaconsultas();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -272,15 +291,15 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61);
-			match(ID);
-			setState(62);
-			match(PARENTESISI);
-			setState(63);
-			match(ID);
 			setState(64);
-			listaid();
+			match(ID);
 			setState(65);
+			match(PARENTESISI);
+			setState(66);
+			match(ID);
+			setState(67);
+			listaid();
+			setState(68);
 			match(PARENTESISD);
 			}
 		}
@@ -321,22 +340,22 @@ public class DatalogParser extends Parser {
 		ListaesquemasContext _localctx = new ListaesquemasContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_listaesquemas);
 		try {
-			setState(71);
+			setState(74);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(67);
+				setState(70);
 				esquema();
-				setState(68);
+				setState(71);
 				listaesquemas();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(70);
+				setState(73);
 				match(NEWLINE);
 				}
 				break;
@@ -380,24 +399,24 @@ public class DatalogParser extends Parser {
 		ListaidContext _localctx = new ListaidContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_listaid);
 		try {
-			setState(77);
+			setState(80);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case COMA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(73);
+				setState(76);
 				match(COMA);
-				setState(74);
+				setState(77);
 				match(ID);
-				setState(75);
+				setState(78);
 				listaid();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(76);
+				setState(79);
 				match(NEWLINE);
 				}
 				break;
@@ -445,17 +464,17 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(79);
-			match(ID);
-			setState(80);
-			match(PARENTESISI);
-			setState(81);
-			match(TEXTO);
 			setState(82);
-			listastrings();
+			match(ID);
 			setState(83);
-			match(PARENTESISD);
+			match(PARENTESISI);
 			setState(84);
+			match(TEXTO);
+			setState(85);
+			listastrings();
+			setState(86);
+			match(PARENTESISD);
+			setState(87);
 			match(PUNTO);
 			}
 		}
@@ -496,22 +515,22 @@ public class DatalogParser extends Parser {
 		ListahechosContext _localctx = new ListahechosContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_listahechos);
 		try {
-			setState(90);
+			setState(93);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(86);
+				setState(89);
 				hecho();
-				setState(87);
+				setState(90);
 				listahechos();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(89);
+				setState(92);
 				match(NEWLINE);
 				}
 				break;
@@ -562,15 +581,15 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
-			cabezapredicado();
-			setState(93);
-			match(DOSPUNTOSGUION);
-			setState(94);
-			predicado();
 			setState(95);
-			listapredicados();
+			cabezapredicado();
 			setState(96);
+			match(DOSPUNTOSGUION);
+			setState(97);
+			predicado();
+			setState(98);
+			listapredicados();
+			setState(99);
 			match(PUNTO);
 			}
 		}
@@ -611,22 +630,22 @@ public class DatalogParser extends Parser {
 		ListareglasContext _localctx = new ListareglasContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_listareglas);
 		try {
-			setState(102);
+			setState(105);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(98);
+				setState(101);
 				regla();
-				setState(99);
+				setState(102);
 				listareglas();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(101);
+				setState(104);
 				match(NEWLINE);
 				}
 				break;
@@ -675,15 +694,15 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
-			match(ID);
-			setState(105);
-			match(PARENTESISI);
-			setState(106);
-			match(ID);
 			setState(107);
-			listaid();
+			match(ID);
 			setState(108);
+			match(PARENTESISI);
+			setState(109);
+			match(ID);
+			setState(110);
+			listaid();
+			setState(111);
 			match(PARENTESISD);
 			}
 		}
@@ -728,15 +747,15 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110);
-			match(ID);
-			setState(111);
-			match(PARENTESISI);
-			setState(112);
-			parametro();
 			setState(113);
-			listaparametros();
+			match(ID);
 			setState(114);
+			match(PARENTESISI);
+			setState(115);
+			parametro();
+			setState(116);
+			listaparametros();
+			setState(117);
 			match(PARENTESISD);
 			}
 		}
@@ -778,24 +797,24 @@ public class DatalogParser extends Parser {
 		ListapredicadosContext _localctx = new ListapredicadosContext(_ctx, getState());
 		enterRule(_localctx, 22, RULE_listapredicados);
 		try {
-			setState(121);
+			setState(124);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case COMA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(116);
+				setState(119);
 				match(COMA);
-				setState(117);
+				setState(120);
 				predicado();
-				setState(118);
+				setState(121);
 				listapredicados();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(120);
+				setState(123);
 				match(NEWLINE);
 				}
 				break;
@@ -838,27 +857,27 @@ public class DatalogParser extends Parser {
 		ParametroContext _localctx = new ParametroContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_parametro);
 		try {
-			setState(126);
+			setState(129);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TEXTO:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(123);
+				setState(126);
 				match(TEXTO);
 				}
 				break;
 			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(124);
+				setState(127);
 				match(ID);
 				}
 				break;
 			case PARENTESISI:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(125);
+				setState(128);
 				expresion();
 				}
 				break;
@@ -904,24 +923,24 @@ public class DatalogParser extends Parser {
 		ListaparametrosContext _localctx = new ListaparametrosContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_listaparametros);
 		try {
-			setState(133);
+			setState(136);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case COMA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(128);
+				setState(131);
 				match(COMA);
-				setState(129);
+				setState(132);
 				parametro();
-				setState(130);
+				setState(133);
 				listaparametros();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(132);
+				setState(135);
 				match(NEWLINE);
 				}
 				break;
@@ -972,15 +991,15 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(135);
-			match(PARENTESISI);
-			setState(136);
-			parametro();
-			setState(137);
-			operador();
 			setState(138);
-			parametro();
+			match(PARENTESISI);
 			setState(139);
+			parametro();
+			setState(140);
+			operador();
+			setState(141);
+			parametro();
+			setState(142);
 			match(PARENTESISD);
 			}
 		}
@@ -1019,7 +1038,7 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(141);
+			setState(144);
 			_la = _input.LA(1);
 			if ( !(_la==MULT || _la==SUMA) ) {
 			_errHandler.recoverInline(this);
@@ -1067,9 +1086,9 @@ public class DatalogParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(143);
+			setState(146);
 			predicado();
-			setState(144);
+			setState(147);
 			match(INTERROGA);
 			}
 		}
@@ -1110,22 +1129,22 @@ public class DatalogParser extends Parser {
 		ListaconsultasContext _localctx = new ListaconsultasContext(_ctx, getState());
 		enterRule(_localctx, 34, RULE_listaconsultas);
 		try {
-			setState(150);
+			setState(153);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(146);
+				setState(149);
 				consulta();
-				setState(147);
+				setState(150);
 				listaconsultas();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(149);
+				setState(152);
 				match(NEWLINE);
 				}
 				break;
@@ -1169,24 +1188,24 @@ public class DatalogParser extends Parser {
 		ListastringsContext _localctx = new ListastringsContext(_ctx, getState());
 		enterRule(_localctx, 36, RULE_listastrings);
 		try {
-			setState(156);
+			setState(159);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case COMA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(152);
+				setState(155);
 				match(COMA);
-				setState(153);
+				setState(156);
 				match(TEXTO);
-				setState(154);
+				setState(157);
 				listastrings();
 				}
 				break;
 			case NEWLINE:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(155);
+				setState(158);
 				match(NEWLINE);
 				}
 				break;
@@ -1206,48 +1225,50 @@ public class DatalogParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31\u00a1\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31\u00a4\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\3\2\3\2\3\2\7\2,\n\2\f\2\16\2/\13\2\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4"+
-		"\3\5\3\5\3\5\3\5\5\5J\n\5\3\6\3\6\3\6\3\6\5\6P\n\6\3\7\3\7\3\7\3\7\3\7"+
-		"\3\7\3\7\3\b\3\b\3\b\3\b\5\b]\n\b\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n"+
-		"\3\n\5\ni\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\f\3"+
-		"\r\3\r\3\r\3\r\3\r\5\r|\n\r\3\16\3\16\3\16\5\16\u0081\n\16\3\17\3\17\3"+
-		"\17\3\17\3\17\5\17\u0088\n\17\3\20\3\20\3\20\3\20\3\20\3\20\3\21\3\21"+
-		"\3\22\3\22\3\22\3\23\3\23\3\23\3\23\5\23\u0099\n\23\3\24\3\24\3\24\3\24"+
-		"\5\24\u009f\n\24\3\24\2\2\25\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
-		"$&\2\3\3\2\23\24\2\u0098\2-\3\2\2\2\4\60\3\2\2\2\6?\3\2\2\2\bI\3\2\2\2"+
-		"\nO\3\2\2\2\fQ\3\2\2\2\16\\\3\2\2\2\20^\3\2\2\2\22h\3\2\2\2\24j\3\2\2"+
-		"\2\26p\3\2\2\2\30{\3\2\2\2\32\u0080\3\2\2\2\34\u0087\3\2\2\2\36\u0089"+
-		"\3\2\2\2 \u008f\3\2\2\2\"\u0091\3\2\2\2$\u0098\3\2\2\2&\u009e\3\2\2\2"+
-		"()\5\4\3\2)*\7\25\2\2*,\3\2\2\2+(\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2"+
-		"\2.\3\3\2\2\2/-\3\2\2\2\60\61\7\17\2\2\61\62\7\r\2\2\62\63\5\6\4\2\63"+
-		"\64\5\b\5\2\64\65\7\20\2\2\65\66\7\r\2\2\66\67\5\16\b\2\678\7\21\2\28"+
-		"9\7\r\2\29:\5\22\n\2:;\7\22\2\2;<\7\r\2\2<=\5\"\22\2=>\5$\23\2>\5\3\2"+
-		"\2\2?@\7\3\2\2@A\7\13\2\2AB\7\3\2\2BC\5\n\6\2CD\7\f\2\2D\7\3\2\2\2EF\5"+
-		"\6\4\2FG\5\b\5\2GJ\3\2\2\2HJ\7\25\2\2IE\3\2\2\2IH\3\2\2\2J\t\3\2\2\2K"+
-		"L\7\t\2\2LM\7\3\2\2MP\5\n\6\2NP\7\25\2\2OK\3\2\2\2ON\3\2\2\2P\13\3\2\2"+
-		"\2QR\7\3\2\2RS\7\13\2\2ST\7\27\2\2TU\5&\24\2UV\7\f\2\2VW\7\b\2\2W\r\3"+
-		"\2\2\2XY\5\f\7\2YZ\5\16\b\2Z]\3\2\2\2[]\7\25\2\2\\X\3\2\2\2\\[\3\2\2\2"+
-		"]\17\3\2\2\2^_\5\24\13\2_`\7\16\2\2`a\5\26\f\2ab\5\30\r\2bc\7\b\2\2c\21"+
-		"\3\2\2\2de\5\20\t\2ef\5\22\n\2fi\3\2\2\2gi\7\25\2\2hd\3\2\2\2hg\3\2\2"+
-		"\2i\23\3\2\2\2jk\7\3\2\2kl\7\13\2\2lm\7\3\2\2mn\5\n\6\2no\7\f\2\2o\25"+
-		"\3\2\2\2pq\7\3\2\2qr\7\13\2\2rs\5\32\16\2st\5\34\17\2tu\7\f\2\2u\27\3"+
-		"\2\2\2vw\7\t\2\2wx\5\26\f\2xy\5\30\r\2y|\3\2\2\2z|\7\25\2\2{v\3\2\2\2"+
-		"{z\3\2\2\2|\31\3\2\2\2}\u0081\7\27\2\2~\u0081\7\3\2\2\177\u0081\5\36\20"+
-		"\2\u0080}\3\2\2\2\u0080~\3\2\2\2\u0080\177\3\2\2\2\u0081\33\3\2\2\2\u0082"+
-		"\u0083\7\t\2\2\u0083\u0084\5\32\16\2\u0084\u0085\5\34\17\2\u0085\u0088"+
-		"\3\2\2\2\u0086\u0088\7\25\2\2\u0087\u0082\3\2\2\2\u0087\u0086\3\2\2\2"+
-		"\u0088\35\3\2\2\2\u0089\u008a\7\13\2\2\u008a\u008b\5\32\16\2\u008b\u008c"+
-		"\5 \21\2\u008c\u008d\5\32\16\2\u008d\u008e\7\f\2\2\u008e\37\3\2\2\2\u008f"+
-		"\u0090\t\2\2\2\u0090!\3\2\2\2\u0091\u0092\5\26\f\2\u0092\u0093\7\n\2\2"+
-		"\u0093#\3\2\2\2\u0094\u0095\5\"\22\2\u0095\u0096\5$\23\2\u0096\u0099\3"+
-		"\2\2\2\u0097\u0099\7\25\2\2\u0098\u0094\3\2\2\2\u0098\u0097\3\2\2\2\u0099"+
-		"%\3\2\2\2\u009a\u009b\7\t\2\2\u009b\u009c\7\27\2\2\u009c\u009f\5&\24\2"+
-		"\u009d\u009f\7\25\2\2\u009e\u009a\3\2\2\2\u009e\u009d\3\2\2\2\u009f\'"+
-		"\3\2\2\2\f-IO\\h{\u0080\u0087\u0098\u009e";
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3A\n\3\3\4\3\4\3"+
+		"\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\5\5M\n\5\3\6\3\6\3\6\3\6\5\6S\n\6\3\7\3"+
+		"\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\5\b`\n\b\3\t\3\t\3\t\3\t\3\t\3"+
+		"\t\3\n\3\n\3\n\3\n\5\nl\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f"+
+		"\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\5\r\177\n\r\3\16\3\16\3\16\5\16\u0084"+
+		"\n\16\3\17\3\17\3\17\3\17\3\17\5\17\u008b\n\17\3\20\3\20\3\20\3\20\3\20"+
+		"\3\20\3\21\3\21\3\22\3\22\3\22\3\23\3\23\3\23\3\23\5\23\u009c\n\23\3\24"+
+		"\3\24\3\24\3\24\5\24\u00a2\n\24\3\24\2\2\25\2\4\6\b\n\f\16\20\22\24\26"+
+		"\30\32\34\36 \"$&\2\3\3\2\21\22\2\u009e\2-\3\2\2\2\4@\3\2\2\2\6B\3\2\2"+
+		"\2\bL\3\2\2\2\nR\3\2\2\2\fT\3\2\2\2\16_\3\2\2\2\20a\3\2\2\2\22k\3\2\2"+
+		"\2\24m\3\2\2\2\26s\3\2\2\2\30~\3\2\2\2\32\u0083\3\2\2\2\34\u008a\3\2\2"+
+		"\2\36\u008c\3\2\2\2 \u0092\3\2\2\2\"\u0094\3\2\2\2$\u009b\3\2\2\2&\u00a1"+
+		"\3\2\2\2()\5\4\3\2)*\7\23\2\2*,\3\2\2\2+(\3\2\2\2,/\3\2\2\2-+\3\2\2\2"+
+		"-.\3\2\2\2.\3\3\2\2\2/-\3\2\2\2\60\61\7\r\2\2\61\62\7\13\2\2\62\63\5\6"+
+		"\4\2\63\64\5\b\5\2\64A\3\2\2\2\65\66\7\16\2\2\66\67\7\13\2\2\67A\5\16"+
+		"\b\289\7\17\2\29:\7\13\2\2:A\5\22\n\2;<\7\20\2\2<=\7\13\2\2=>\5\"\22\2"+
+		">?\5$\23\2?A\3\2\2\2@\60\3\2\2\2@\65\3\2\2\2@8\3\2\2\2@;\3\2\2\2A\5\3"+
+		"\2\2\2BC\7\30\2\2CD\7\t\2\2DE\7\30\2\2EF\5\n\6\2FG\7\n\2\2G\7\3\2\2\2"+
+		"HI\5\6\4\2IJ\5\b\5\2JM\3\2\2\2KM\7\23\2\2LH\3\2\2\2LK\3\2\2\2M\t\3\2\2"+
+		"\2NO\7\7\2\2OP\7\30\2\2PS\5\n\6\2QS\7\23\2\2RN\3\2\2\2RQ\3\2\2\2S\13\3"+
+		"\2\2\2TU\7\30\2\2UV\7\t\2\2VW\7\25\2\2WX\5&\24\2XY\7\n\2\2YZ\7\6\2\2Z"+
+		"\r\3\2\2\2[\\\5\f\7\2\\]\5\16\b\2]`\3\2\2\2^`\7\23\2\2_[\3\2\2\2_^\3\2"+
+		"\2\2`\17\3\2\2\2ab\5\24\13\2bc\7\f\2\2cd\5\26\f\2de\5\30\r\2ef\7\6\2\2"+
+		"f\21\3\2\2\2gh\5\20\t\2hi\5\22\n\2il\3\2\2\2jl\7\23\2\2kg\3\2\2\2kj\3"+
+		"\2\2\2l\23\3\2\2\2mn\7\30\2\2no\7\t\2\2op\7\30\2\2pq\5\n\6\2qr\7\n\2\2"+
+		"r\25\3\2\2\2st\7\30\2\2tu\7\t\2\2uv\5\32\16\2vw\5\34\17\2wx\7\n\2\2x\27"+
+		"\3\2\2\2yz\7\7\2\2z{\5\26\f\2{|\5\30\r\2|\177\3\2\2\2}\177\7\23\2\2~y"+
+		"\3\2\2\2~}\3\2\2\2\177\31\3\2\2\2\u0080\u0084\7\25\2\2\u0081\u0084\7\30"+
+		"\2\2\u0082\u0084\5\36\20\2\u0083\u0080\3\2\2\2\u0083\u0081\3\2\2\2\u0083"+
+		"\u0082\3\2\2\2\u0084\33\3\2\2\2\u0085\u0086\7\7\2\2\u0086\u0087\5\32\16"+
+		"\2\u0087\u0088\5\34\17\2\u0088\u008b\3\2\2\2\u0089\u008b\7\23\2\2\u008a"+
+		"\u0085\3\2\2\2\u008a\u0089\3\2\2\2\u008b\35\3\2\2\2\u008c\u008d\7\t\2"+
+		"\2\u008d\u008e\5\32\16\2\u008e\u008f\5 \21\2\u008f\u0090\5\32\16\2\u0090"+
+		"\u0091\7\n\2\2\u0091\37\3\2\2\2\u0092\u0093\t\2\2\2\u0093!\3\2\2\2\u0094"+
+		"\u0095\5\26\f\2\u0095\u0096\7\b\2\2\u0096#\3\2\2\2\u0097\u0098\5\"\22"+
+		"\2\u0098\u0099\5$\23\2\u0099\u009c\3\2\2\2\u009a\u009c\7\23\2\2\u009b"+
+		"\u0097\3\2\2\2\u009b\u009a\3\2\2\2\u009c%\3\2\2\2\u009d\u009e\7\7\2\2"+
+		"\u009e\u009f\7\25\2\2\u009f\u00a2\5&\24\2\u00a0\u00a2\7\23\2\2\u00a1\u009d"+
+		"\3\2\2\2\u00a1\u00a0\3\2\2\2\u00a2\'\3\2\2\2\r-@LR_k~\u0083\u008a\u009b"+
+		"\u00a1";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
