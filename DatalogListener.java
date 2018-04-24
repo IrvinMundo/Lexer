@@ -7,16 +7,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface DatalogListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link DatalogParser#r}.
-	 * @param ctx the parse tree
-	 */
-	void enterR(DatalogParser.RContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DatalogParser#r}.
-	 * @param ctx the parse tree
-	 */
-	void exitR(DatalogParser.RContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link DatalogParser#prog}.
 	 * @param ctx the parse tree
 	 */

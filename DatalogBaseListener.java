@@ -15,18 +15,6 @@ public class DatalogBaseListener implements DatalogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterR(DatalogParser.RContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitR(DatalogParser.RContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterProg(DatalogParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -2,14 +2,14 @@
  * Define a grammar called Hello
  */
 grammar Datalog;
-r  : 'hello' ID ;         // match keyword hello followed by an identifier
+prog:	(expr NEWLINE)* ;
 
 ID : [a-zA-Z][a-zA-Z0-9]* ;             // match lower-case identifiers
 //ID:('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'| INT )*;
 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 
-prog:	(expr NEWLINE)* ;
+
 
 expr:	ESQUEMAS DOSPUNTOS esquema listaesquemas   HECHOS DOSPUNTOS listahechos   REGLAS DOSPUNTOS listareglas   CONSULTAS DOSPUNTOS consulta listaconsultas;
 
