@@ -5,7 +5,7 @@ grammar Datalog;
 prog:	(expr NEWLINE)* ;
 
 
-expr:	ESQUEMAS DOSPUNTOS esquema listaesquemas |  HECHOS DOSPUNTOS listahechos |  REGLAS DOSPUNTOS listareglas |  CONSULTAS DOSPUNTOS consulta listaconsultas;
+expr:	ESQUEMAS DOSPUNTOS esquema listaesquemas |  HECHOS DOSPUNTOS listahechos |  REGLAS DOSPUNTOS listareglas |  CONSULTAS DOSPUNTOS consulta listaconsultas | select;
 
 esquema: ID PARENTESISI ID listaid PARENTESISD;
 
@@ -41,12 +41,16 @@ listaconsultas: consulta listaconsultas | NEWLINE;
 
 listastrings: COMA TEXTO listastrings | NEWLINE;
 
+select: INTERROGA GUIONMEDIO predicado;
+
 
 IGUAL: '=' ;
 
 DIFER: '!=' ;
 
 GUION: '~' ;
+
+GUIONMEDIO: '-' ;
 
 PUNTO:'.';
 

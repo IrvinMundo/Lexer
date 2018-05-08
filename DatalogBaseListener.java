@@ -238,6 +238,18 @@ public class DatalogBaseListener implements DatalogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitListastrings(DatalogParser.ListastringsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSelect(DatalogParser.SelectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSelect(DatalogParser.SelectContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

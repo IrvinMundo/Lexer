@@ -196,4 +196,14 @@ public interface DatalogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitListastrings(DatalogParser.ListastringsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DatalogParser#select}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelect(DatalogParser.SelectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DatalogParser#select}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelect(DatalogParser.SelectContext ctx);
 }
