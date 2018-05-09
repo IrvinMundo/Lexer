@@ -49,5 +49,7 @@ public class MyListener extends DatalogBaseListener {
     }
     sentencia = sentencia + "FROM " + tablas.get(0);
     System.out.println(sentencia);
+	ConexionBD conexionBD = new ConexionBD(sentencia);
+	conexionBD.realizarConsulta();
   }
 }
